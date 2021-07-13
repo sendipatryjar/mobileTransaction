@@ -1,0 +1,3 @@
+export const GET_LIST_REQ = 'GET_LIST_REQ';
+export const GET_LIST_SUCCESS = 'GET_LIST_SUCCESS';
+export const GET_LIST_FAILED = 'GET_LIST_FAILED';
