@@ -1,18 +1,18 @@
 export const convertYears = dateStr => {
   //  Convert a string like '2020-10-04T00:00:00' into '4/Oct/2020'
   let months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
+    'January',
+    'Februari',
+    'Maret',
+    'April',
     'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
+    'Juni',
+    'July',
+    'Agustus',
+    'September',
+    'October',
+    'November',
+    'Desember',
   ];
   let date = new Date(dateStr.substring(0, 10));
   let str =
@@ -21,5 +21,5 @@ export const convertYears = dateStr => {
 };
 
 export const currencyFormat = (num) => {
-    return `Rp.${num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+    return `Rp${num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
  };

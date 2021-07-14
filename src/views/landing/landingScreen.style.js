@@ -1,0 +1,106 @@
+import {StyleSheet} from 'react-native';
+
+const styles = StyleSheet.create({
+  flexOne: {
+    flex: 1,
+  },
+  containerList: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff',
+    margin: 10,
+    borderRadius: 5,
+    paddingRight: 10,
+  },
+  containerLabelLeftOrange: {
+    backgroundColor: '#e35c19',
+    flex: 0,
+    width: 5,
+    height: 120,
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+    marginRight: 5,
+  },
+  containerLabelLeftGreen: {
+    backgroundColor: '#148F0F',
+    flex: 0,
+    width: 5,
+    height: 120,
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+    marginRight: 5,
+  },
+  borderOrange: {
+    flex: 0,
+    borderColor: '#e35c19',
+    borderWidth: 2,
+    borderRadius: 5,
+    backgroundColor: '#ffffff',
+  },
+  borderGreen: {
+    flex: 0,
+    borderColor: '#148F0F',
+    borderWidth: 2,
+    borderRadius: 5,
+    backgroundColor: '#148F0F',
+  },
+  containerModal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  componentModal: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  radioCircle: {
+    width: 20,
+    height: 20,
+    borderWidth: 1,
+    borderColor: '#e35c19',
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 0,
+  },
+  radioCircleActive: {
+    width: 15,
+    height: 15,
+    backgroundColor: '#e35c19',
+    borderRadius: 10,
+  },
+  radioCircleNull: {
+    width: 15,
+    height: 15,
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+  },
+  containerSearch: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff',
+    margin: 10,
+    borderRadius: 5,
+  },
+  textFilter: {
+    fontWeight: 'bold',
+    padding: 5,
+    fontSize: 12,
+    color: '#e35c19',
+  }
+});
+export default styles;

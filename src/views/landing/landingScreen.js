@@ -14,6 +14,7 @@ import {connect} from 'react-redux';
 import {GetList} from './../../actions/actions';
 import * as Utils from './../../utils/convert';
 import Icon from 'react-native-vector-icons/AntDesign';
+import styles from './landingScreen.style';
 
 const LandingScreen = props => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -79,7 +80,6 @@ const LandingScreen = props => {
       if (data.length > 0) {
         setList(data);
       }
-      console.log(value);
     }
   };
 
@@ -105,7 +105,6 @@ const LandingScreen = props => {
           return -1;
         }
       });
-      console.log(JSON.stringify(array))
       setList(array);
     } else if (value === 'Tanggal Terlama') {
       const array = myData.sort((a, b) => {
@@ -115,7 +114,6 @@ const LandingScreen = props => {
           return -1;
         }
       });
-      console.log(JSON.stringify(array))
       setList(array);
     } else {
       setList(myData);
@@ -131,29 +129,18 @@ const LandingScreen = props => {
           data={listTransaction}
           renderItem={({item, index}) => (
             <TouchableOpacity
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: '#ffffff',
-                margin: 10,
-                borderRadius: 5,
-                paddingRight: 10,
-              }}
-              onPress={() => props.navigation.navigate('DetailScreen')}>
+              style={styles.containerList}
+              onPress={() =>
+                props.navigation.navigate('DetailScreen', {data: item})
+              }>
               <View
-                style={{
-                  backgroundColor:
-                    item.status === 'SUCCESS' ? '#148F0F' : '#e35c19',
-                  flex: 0,
-                  width: 10,
-                  height: 120,
-                  borderTopLeftRadius: 5,
-                  borderBottomLeftRadius: 5,
-                  marginRight: 5,
-                }}
+                style={
+                  item.status === 'SUCCESS'
+                    ? styles.containerLabelLeftGreen
+                    : styles.containerLabelLeftOrange
+                }
               />
-              <View style={{flex: 1}}>
+              <View style={styles.flexOne}>
                 <Text style={{fontWeight: 'bold'}}>
                   {item.sender_bank.toUpperCase()} ➔{' '}
                   {item.beneficiary_bank.toUpperCase()}
@@ -161,22 +148,18 @@ const LandingScreen = props => {
                 <Text style={{fontWeight: 'bold'}}>
                   {item.beneficiary_name.toUpperCase()}
                 </Text>
-                <Text style={{fontWeight: 'bold'}}>
+                <Text style={{fontWeight: '400'}}>
                   {Utils.currencyFormat(item.amount)} ●{' '}
                   {Utils.convertYears(item.completed_at)}
                 </Text>
               </View>
 
               <View
-                style={{
-                  flex: 0,
-                  borderColor:
-                    item.status === 'SUCCESS' ? '#148F0F' : '#e35c19',
-                  borderWidth: 3,
-                  borderRadius: 5,
-                  backgroundColor:
-                    item.status === 'SUCCESS' ? '#148F0F' : '#ffffff',
-                }}>
+                style={
+                  item.status === 'SUCCESS'
+                    ? styles.borderGreen
+                    : styles.borderOrange
+                }>
                 <Text
                   style={{
                     fontWeight: 'bold',
@@ -184,9 +167,9 @@ const LandingScreen = props => {
                     color: item.status === 'SUCCESS' ? '#ffffff' : '#000000',
                   }}>
                   {item.status === 'SUCCESS'
-                    ? 'BERHASIL'
+                    ? 'Berhasil'
                     : item.status === 'PENDING'
-                    ? 'PENGECEKAN'
+                    ? 'Pengecekan'
                     : item.status}
                 </Text>
               </View>
@@ -210,61 +193,20 @@ const LandingScreen = props => {
         onRequestClose={() => {
           setModalVisible(false);
         }}>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 22,
-          }}>
-          <View
-            style={{
-              margin: 20,
-              backgroundColor: 'white',
-              borderRadius: 20,
-              padding: 35,
-              alignItems: 'center',
-              shadowColor: '#000',
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 4,
-              elevation: 5,
-            }}>
+        <View style={styles.containerModal}>
+          <View style={styles.componentModal}>
             {sorting.map((item, index) => {
               return (
                 <TouchableOpacity
                   key={index}
                   style={{flexDirection: 'row', margin: 10}}
                   onPress={() => _setFilter(item.name)}>
-                  <View
-                    style={{
-                      width: 20,
-                      height: 20,
-                      borderWidth: 1,
-                      borderColor: '#e35c19',
-                      borderRadius: 10,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flex: 0,
-                    }}>
+                  <View style={styles.radioCircle}>
                     <View
                       style={
                         filterName === item.name
-                          ? {
-                              width: 15,
-                              height: 15,
-                              backgroundColor: '#e35c19',
-                              borderRadius: 10,
-                            }
-                          : {
-                              width: 15,
-                              height: 15,
-                              backgroundColor: '#ffffff',
-                              borderRadius: 10,
-                            }
+                          ? styles.radioCircleActive
+                          : styles.radioCircleNull
                       }
                     />
                   </View>
@@ -278,30 +220,16 @@ const LandingScreen = props => {
           </View>
         </View>
       </Modal>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#ffffff',
-          margin: 10,
-          borderRadius: 5,
-        }}>
-        <Icon color={'#000000'} name={'search1'} size={20} style={{}} />
+      <View style={styles.containerSearch}>
+        <Icon color={'gray'} name={'search1'} size={20} />
         <TextInput
+          placeholderTextColor={'gray'}
           placeholder={'Cari nama, bank, atau nominal'}
-          style={{padding: 15}}
+          style={{padding: 10, fontSize: 12}}
           value={keyword}
           onChangeText={text => _onChangeText(text)}
         />
-        <Text
-          style={{
-            fontWeight: 'bold',
-            padding: 5,
-            color: '#e35c19',
-          }}>
-          {filterName}
-        </Text>
+        <Text style={styles.textFilter}>{filterName}</Text>
         {filter === 0 ? (
           <Icon
             color={'#e35c19'}

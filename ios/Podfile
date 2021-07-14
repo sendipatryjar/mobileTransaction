@@ -18,6 +18,8 @@ target 'testFlip' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNCClipboard', :path => '../node_modules/@react-native-community/clipboard'
+
   target 'testFlipTests' do
     inherit! :complete
     # Pods for testing
