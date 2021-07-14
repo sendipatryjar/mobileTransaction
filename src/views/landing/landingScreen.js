@@ -240,7 +240,7 @@ const LandingScreen = props => {
         <TextInput
           placeholderTextColor={'gray'}
           placeholder={'Cari nama, bank, atau nominal'}
-          style={{padding: 10, fontSize: 12}}
+          style={{padding: 10, fontSize: 12, color: 'gray'}}
           value={keyword}
           onChangeText={text => _onChangeText(text)}
         />
