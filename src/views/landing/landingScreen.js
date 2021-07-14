@@ -9,6 +9,7 @@ import {
   View,
   TouchableOpacity,
   Modal,
+  RefreshControl,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {GetList} from './../../actions/actions';
@@ -22,6 +23,7 @@ const LandingScreen = props => {
   const [keyword, setKeyword] = useState('');
   const [filter, setFilter] = useState(0);
   const [filterName, setFilterName] = useState('URUTKAN');
+  const [isFetching, setFetching] = useState(false);
   const [sorting, setSorting] = useState([
     {
       name: 'URUTKAN',
@@ -121,12 +123,25 @@ const LandingScreen = props => {
     setFilterName(value);
     setModalVisible(false);
   };
-
+  const onRefresh = () => {
+    setFetching(true);
+    function refreshPage() {
+      props.GetList();
+      setFetching(false);
+    }
+    refreshPage();
+  };
   const _renderList = data => {
     if (data != null) {
       return (
         <FlatList
           data={listTransaction}
+          refreshControl={
+            <RefreshControl
+              refreshing={isFetching}
+              onRefresh={() => onRefresh()}
+            />
+          }
           renderItem={({item, index}) => (
             <TouchableOpacity
               style={styles.containerList}
