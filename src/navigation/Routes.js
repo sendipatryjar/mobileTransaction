@@ -30,21 +30,9 @@ class Root extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <AppNavigator
-          onNavigationStateChange={(prevState, newState) => {
-            this._getCurrentRouteName(newState);
-          }}
-        />
+        <AppNavigator />
       </Provider>
     );
-  }
-
-  _getCurrentRouteName(navState) {
-    if (navState.hasOwnProperty('index')) {
-      this._getCurrentRouteName(navState.routes[navState.index]);
-    } else {
-      store.dispatch({type: ROUTE_CHANGES, payload: navState.routeName});
-    }
   }
 }
 export default Root;
